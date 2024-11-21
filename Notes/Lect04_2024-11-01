@@ -1,0 +1,121 @@
+# Steque
+
+- **Definition**: A "steque" (stack-ended queue) is a hybrid data structure that combines the properties of a stack and a queue.
+- **Characteristics**:
+  - Supports three primary operations: `push`, `pop`, and `enqueue`.
+  - **One end is used to enqueue** elements (queue behavior).
+  - The **opposite end operates as a stack**, where elements can be pushed or popped.
+
+![[Pasted image 20241101084843.png]]
+
+
+### Operations in a Steque
+
+1. **Push**:
+   - Adds an element to the **top** of the steque.
+   - After a push, the newly added element is at the **front** of the steque.
+
+2. **Pop**:
+   - Removes and returns the element at the **top** of the steque.
+   - After popping, the element directly below becomes the new front.
+
+3. **Enqueue**:
+   - Adds an element to the **end** of the steque.
+   - The newly added element becomes the **rear** of the steque.
+
+4. **Peek**:
+   - Returns the front element’s value without removing it from the steque.
+
+#### Operations Illustration
+
+- **Push Operation**:
+  - Adds an element to the front, shifting all other elements back in position (stack behavior).
+  
+- **Pop Operation**:
+  - Removes the front element, allowing access to the next element in the stack.
+
+- **Enqueue Operation**:
+  - Adds an element to the rear of the steque, preserving queue functionality for insertion.
+
+---
+
+# Insertion Sort
+
+- **Description**: Insertion sort is a simple and intuitive sorting algorithm, often used for sorting small arrays or arrays that are nearly sorted.
+- **Working Mechanism**:
+  - The array is divided into a **sorted** part and an **unsorted** part.
+  - Each element from the unsorted part is picked and **inserted into its correct position** in the sorted part.
+  - This process mimics arranging playing cards by inserting each card into its correct spot among the previously sorted cards.
+
+### Steps of Insertion Sort
+
+1. **Initial Comparison**:
+   - Start with the first two elements (`data[0]` and `data[1]`).
+   - If these elements are out of order, they are swapped.
+
+2. **Sequential Insertion**:
+   - The next element from the unsorted portion is selected and inserted into the correct position within the sorted part.
+   - If this element is smaller than one or more elements in the sorted section, each larger element is **shifted one position to the right** to make room.
+
+3. **Repeat Until Sorted**:
+   - Continue this process for each element until the entire array is sorted.
+
+### When to Use Insertion Sort
+
+- **Small Number of Elements**: Insertion sort is efficient when the dataset is small due to its minimal overhead.
+- **Nearly Sorted Arrays**: This sort works well on arrays that are nearly sorted, as fewer swaps are needed.
+- **Few Misplaced Elements in Large Arrays**: It is also effective when only a few elements are out of order in an otherwise sorted array.
+
+### Insertion Sort Algorithm
+
+1. **Iterate**: Loop from `arr[1]` to `arr[N-1]` over the array.
+2. **Compare**: Compare each element to its previous values in the sorted portion.
+3. **Shift**: If the current element (key) is smaller, shift each larger element one position up to make space.
+4. **Insert**: Place the key element in its correct position.
+
+### Example Code
+
+The following Java code demonstrates the insertion sort in action:
+
+```java
+int arr[] = { 8, 5, 1, 2, 9 };
+for (int i = 1; i < arr.length; i++){
+    int key = arr[i];
+    int j = i - 1;
+
+    // Shift elements of arr[0..i-1] that are greater than key
+    while (j >= 0 && arr[j] > key) {
+        arr[j + 1] = arr[j];
+        j = j - 1;
+    }
+    arr[j + 1] = key;
+}
+```
+
+example with swap method ( higher running time than above method)
+
+```java
+int[] arr = {8, 5, 1, 2, 9}; 
+for (int i = 1; i < arr.length; i++) { 
+	int j = i; // Swap until the current element is in the correct position 
+	while (j > 0 && arr[j - 1] > arr[j]) { // Swap arr[j] and arr[j - 1] 
+		int temp = arr[j]; 
+		arr[j] = arr[j - 1]; 
+		arr[j - 1] = temp; 
+		j--; 
+	} 
+}
+```
+### Complexity of Insertion Sort
+
+- **Time Complexity**:
+  - **Best Case**: \( O(n) \) when the array is already sorted.
+  - **Average and Worst Case**: \( O(n^2) \) due to the nested loop for each insertion.
+- **Space Complexity**: \( O(1) \), as it sorts in place without requiring extra memory.
+
+---
+
+### Summary
+
+- **Steque**: Combines stack and queue functionalities, allowing push and pop from one end and enqueue at the other.
+- **Insertion Sort**: A simple sorting algorithm ideal for small or nearly sorted arrays, using an insertion-based approach to achieve sorted order.
