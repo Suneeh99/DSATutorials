@@ -1,0 +1,176 @@
+## Class Implementation of Linked List
+
+we implement a **singly linked list** using three classes:
+
+1. **Node**: Represents a single element of the linked list.
+2. **LinkedList**: Manages the list and its operations.
+3. **Main**: Contains the `main` method to test the functionality.
+
+---
+
+#### 1. **Node Class**
+
+The `Node` class represents a single node in the linked list. Each node contains:
+
+- **Data**: Stores the value of the node.
+- **Next**: A reference to the next node in the list.
+
+**Code**:
+
+```java
+public class Node {
+    public int data; // Value of the node
+    public Node next; // Reference to the next node
+
+    public Node(int data) {
+        this.data = data;
+        this.next = null; // By default, the next reference is null
+    }
+}
+```
+
+---
+
+#### 2. **LinkedList Class**
+
+The `LinkedList` class handles the operations on the list. It maintains a reference to the head node and provides methods for:
+
+- Adding nodes.
+- Removing nodes.
+- Displaying the list.
+
+---
+
+##### **a. Add Method**
+
+- **Purpose**: Adds a new node to the end of the list.
+- **Logic**:
+    - If the list is empty (`head` is null), set the new node as the head.
+    - Otherwise, traverse to the end of the list and set the `next` pointer of the last node to the new node.
+
+---
+
+##### **b. Remove Method**
+
+- **Purpose**: Removes a node by its value.
+- **Logic**:
+    - If the list is empty, display a message.
+    - If the value matches the head node, remove it by updating `head` to `head.next`.
+    - Otherwise, traverse the list to find the node before the one to be deleted. Update its `next` pointer to skip the target node.
+
+---
+
+##### **c. Display Method**
+
+- **Purpose**: Prints the values of all nodes in the list.
+- **Logic**:
+    - Start at the head node and traverse the list.
+    - Print the value of each node, followed by an arrow (`->`).
+    - Print `null` at the end to indicate the end of the list.
+
+**Code**:
+
+```java
+public class LinkedList {
+    private Node head; // Head of the list
+
+    // Add a new node to the end of the list
+    public void add(int data) {
+        Node newNode = new Node(data);
+        if (head == null) {
+            head = newNode; // If the list is empty, set the new node as the head
+        } else {
+            Node temp = head;
+            while (temp.next != null) { // Traverse to the end of the list
+                temp = temp.next;
+            }
+            temp.next = newNode; // Link the new node to the linked list
+        }
+    }
+
+    // Remove a node by value
+    public void remove(int data) {
+        if (head == null) {
+            System.out.println("List is empty");
+            return;
+        }
+        if (head.data == data) {
+            head = head.next; // Remove the head node if it matches the value
+            return;
+        }
+        Node temp = head;
+        while (temp.next != null && temp.next.data != data) {
+            temp = temp.next; // Traverse until the node before the target node
+        }
+        if (temp.next == null) {
+            System.out.println("Element not found"); // Value not in the list
+        } else {
+            temp.next = temp.next.next; // Unlink the target node
+        }
+    }
+
+    // Display the linked list
+    public void display() {
+        if (head == null) {
+            System.out.println("List is empty");
+            return;
+        }
+        Node temp = head;
+        while (temp != null) {
+            System.out.print(temp.data + " -> ");
+            temp = temp.next;
+        }
+        System.out.println("null"); // End of the list
+    }
+}
+```
+
+---
+
+#### 3. **Main Class**
+
+The `Main` class contains the `main` method to test the linked list.
+
+**Code**:
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        LinkedList list = new LinkedList();
+
+        // Add nodes
+        list.add(10);
+        list.add(23);
+        list.add(21);
+
+        // Display the linked list
+        System.out.println("Linked List:");
+        list.display();
+
+        // Remove nodes
+        list.remove(10); // Remove head node
+        list.remove(21); // Remove tail node
+
+        // Display the linked list after removals
+        System.out.println("Linked List after removals:");
+        list.display();
+    }
+}
+```
+
+---
+
+### Key Points:
+
+1. The **Node** class is the building block of the linked list.
+2. The **LinkedList** class provides methods for adding, removing, and displaying nodes.
+3. The **Main** class is used to test the implementation.
+
+### Sample Output:
+
+```text
+Linked List:
+10 -> 23 -> 21 -> null
+Linked List after removals:
+23 -> null
+```
