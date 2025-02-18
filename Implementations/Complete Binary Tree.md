@@ -1,4 +1,4 @@
-# **Complete Binary Tree Explanation**
+# **Complete Binary Tree Implementation**
 
 A **complete binary tree** is a type of binary tree where:
 1. Every level, except possibly the last, is completely filled.
